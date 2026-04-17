@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ақылды Сабақ Жоспары</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Noto+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Background decoration -->
+  <div class="bg-orb orb1"></div>
+  <div class="bg-orb orb2"></div>
+  <div class="bg-orb orb3"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <span class="logo-icon">✦</span>
+      <span class="logo-text">АСЖ <em>AI</em></span>
+    </div>
+    <div class="header-badge">Хакатон 2025</div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-eyebrow">Жасанды интеллект · Білім беру</div>
+    <h1 class="hero-title">
+      Ақылды<br />
+      <span class="gradient-text">Сабақ Жоспары</span>
+    </h1>
+    <p class="hero-sub">5 минутта толыққанды сабақ жоспары, дидактикалық материал және презентация құрылымы</p>
+  </section>
+
+  <!-- API Key Section -->
+  <section class="api-section" id="apiSection">
+    <div class="card api-card">
+      <div class="card-icon">🔑</div>
+      <h3>Gemini API кілті</h3>
+      <p>Google AI Studio-дан тегін API кілт алыңыз</p>
+      <div class="api-input-row">
+        <input type="password" id="apiKey" placeholder="AIza..." class="api-input" />
+        <button class="btn-save" onclick="saveApiKey()">Сақтау</button>
+      </div>
+      <a href="https://aistudio.google.com/app/apikey" target="_blank" class="api-link">→ API кілт алу (тегін)</a>
+      <div id="apiStatus" class="api-status hidden"></div>
+    </div>
+  </section>
+
+  <!-- Form Section -->
+  <section class="form-section">
+    <div class="form-header">
+      <h2>Сабақ ақпараты</h2>
+      <p>Барлық өрістерді толтырыңыз</p>
+    </div>
+
+    <div class="form-grid">
+      <!-- Пән -->
+      <div class="field-group">
+        <label class="field-label">
+          <span class="field-num">01</span>
+          Пән
+        </label>
+        <input type="text" id="subject" placeholder="Мысалы: Математика, Биология, Тарих..." class="field-input" />
+      </div>
+
+      <!-- Сынып -->
+      <div class="field-group">
+        <label class="field-label">
+          <span class="field-num">02</span>
+          Сынып
+        </label>
+        <select id="grade" class="field-input">
+          <option value="">Таңдаңыз...</option>
+          <option>1-сынып</option><option>2-сынып</option><option>3-сынып</option>
+          <option>4-сынып</option><option>5-сынып</option><option>6-сынып</option>
+          <option>7-сынып</option><option>8-сынып</option><option>9-сынып</option>
+          <option>10-сынып</option><option>11-сынып</option>
+        </select>
+      </div>
+
+      <!-- Сынып бағыты -->
+      <div class="field-group">
+        <label class="field-label">
+          <span class="field-num">03</span>
+          Сынып бағыты
+        </label>
+        <select id="direction" class="field-input">
+          <option value="">Таңдаңыз...</option>
+          <option>Жаратылыстану-математика</option>
+          <option>Қоғамдық-гуманитарлық</option>
+          <option>Жалпы білім</option>
+          <option>Техникалық және кәсіптік</option>
+          <option>Арнайы</option>
+        </select>
+      </div>
+
+      <!-- Тақырып -->
+      <div class="field-group field-wide">
+        <label class="field-label">
+          <span class="field-num">04</span>
+          Сабақ тақырыбы
+        </label>
+        <input type="text" id="topic" placeholder="Мысалы: Квадрат теңдеулер, Фотосинтез..." class="field-input" />
+      </div>
+
+      <!-- Кітап баспасы -->
+      <div class="field-group">
+        <label class="field-label">
+          <span class="field-num">05</span>
+          Кітап баспасы
+        </label>
+        <select id="publisher" class="field-input">
+          <option value="">Таңдаңыз...</option>
+          <option>Мектеп</option>
+          <option>Атамұра</option>
+          <option>Алматыкітап</option>
+          <option>Рауан</option>
+          <option>Білім</option>
+          <option>Өзге баспа</option>
+        </select>
+      </div>
+
+      <!-- Инклюзивті оқушы -->
+      <div class="field-group">
+        <label class="field-label">
+          <span class="field-num">06</span>
+          Инклюзивті оқушы
+        </label>
+        <select id="inclusive" class="field-input" onchange="toggleInclusiveDetail()">
+          <option value="жоқ">Жоқ</option>
+          <option value="бар">Бар</option>
+        </select>
+      </div>
+
+      <!-- Инклюзивті ерекшелік -->
+      <div class="field-group field-wide" id="inclusiveDetail" style="display:none">
+        <label class="field-label">
+          <span class="field-num">06+</span>
+          Инклюзивті оқушының ерекшелігі
+        </label>
+        <input type="text" id="inclusiveType" placeholder="Мысалы: Есту қабілеті нашар, ДЦП, аутизм спектрі..." class="field-input" />
+      </div>
+    </div>
+
+    <!-- Generate Button -->
+    <div class="generate-row">
+      <button class="btn-generate" id="generateBtn" onclick="generatePlan()">
+        <span class="btn-icon">⚡</span>
+        <span class="btn-text">Сабақ жоспарын жасау</span>
+        <span class="btn-arrow">→</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Loading -->
+  <div class="loading-overlay hidden" id="loadingOverlay">
+    <div class="loading-card">
+      <div class="loading-spinner"></div>
+      <div class="loading-text" id="loadingText">Gemini AI ойлануда...</div>
+      <div class="loading-steps">
+        <span class="step" id="step1">📋 Жоспар құрылуда</span>
+        <span class="step" id="step2">📚 Материалдар дайындалуда</span>
+        <span class="step" id="step3">🎯 Презентация жасалуда</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Result Section -->
+  <section class="result-section hidden" id="resultSection">
+    <div class="result-header">
+      <h2>✅ Сабақ жоспары дайын!</h2>
+      <div class="result-actions">
+        <button class="btn-action" onclick="copyResult()">📋 Көшіру</button>
+        <button class="btn-action" onclick="downloadResult()">⬇️ Жүктеу</button>
+        <button class="btn-action btn-new" onclick="resetForm()">🔄 Жаңа жоспар</button>
+      </div>
+    </div>
+
+    <div class="result-tabs">
+      <button class="tab active" onclick="switchTab('plan', this)">📋 Сабақ жоспары</button>
+      <button class="tab" onclick="switchTab('didactic', this)">📚 Дидактикалық материал</button>
+      <button class="tab" onclick="switchTab('presentation', this)">🖥️ Презентация</button>
+    </div>
+
+    <div class="result-body">
+      <div class="result-content" id="tabPlan"></div>
+      <div class="result-content hidden" id="tabDidactic"></div>
+      <div class="result-content hidden" id="tabPresentation"></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>АСЖ AI · Хакатон 2025 · Қазақстан</p>
+    <p class="footer-sub">Gemini 1.5 Flash технологиясымен жасалған</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
